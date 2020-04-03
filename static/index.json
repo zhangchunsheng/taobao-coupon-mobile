@@ -1,0 +1,60 @@
+
+{
+    "swiper" : [{
+          "id": "0001",
+          "imgUrl": "https://img.alicdn.com/imgextra/i3/2053469401/O1CN012JJhs2zqgf868Bs-2053469401.png"
+        },{
+          "id": "0002",
+          "imgUrl": "https://img.alicdn.com/imgextra/i1/2508158775/TB2rFLkfgDD8KJjy0FdXXcjvXXa_!!2508158775.jpg"
+        },{
+          "id": "0003",
+          "imgUrl": "https://img.alicdn.com/imgextra/i2/2508158775/O1CN012Egzw5nJwNawcuJ_!!2508158775.jpg"
+        },{
+          "id": "0004",
+          "imgUrl": "https://img.alicdn.com/imgextra/i4/2508158775/O1CN012Egzw6u7GXF9Ev4_!!2508158775.jpg"
+        },{
+          "id": "0005",
+          "imgUrl": "https://img.alicdn.com/imgextra/i3/2508158775/O1CN012Egzw5YIEZAz6gN_!!2508158775.jpg"
+        }],
+    "iconList": [{
+      "id": "10",
+      "imgUrl": "https://img.alicdn.com/imgextra/i3/790237325/O1CN01yUU6Mk23ytm0kjwSB_!!790237325.png?t=1585879845000",
+      "desc": "女装"
+    }, {
+      "id": "12",
+      "imgUrl": "https://img.alicdn.com/imgextra/i4/790237325/O1CN01FDXXSA23ytlzRkkmH_!!790237325.png?t=1585879845000",
+      "desc": "男装"
+    }, {
+      "id": "5",
+      "imgUrl": "https://img.alicdn.com/imgextra/i3/790237325/O1CN01C35bzh23ytm4sxytD_!!790237325.png?t=1585879845000",
+      "desc": "鞋包"
+    }, {
+      "id": "11",
+      "imgUrl": "https://img.alicdn.com/imgextra/i2/790237325/O1CN01xQoOH023ytm2h01ZK_!!790237325.png?t=1585879845000",
+      "desc": "内衣"
+    }, {
+      "id": "2",
+      "imgUrl": "https://img.alicdn.com/imgextra/i2/790237325/O1CN01PW0EfD23ytlukAbgr_!!790237325.png?t=1585879845000",
+      "desc": "母婴"
+    }, {
+      "id": "3",
+      "imgUrl": "https://img.alicdn.com/imgextra/i1/790237325/O1CN01qq6MlR23ytm34KeNw_!!790237325.png?t=1585879844000",
+      "desc": "美妆"
+    }, {
+      "id": "5",
+      "imgUrl": "https://img.alicdn.com/imgextra/i3/790237325/O1CN01Adc0hh23ytm2h0ICN_!!790237325.png?t=1585879844000",
+      "desc": "配饰"
+    }, {
+      "id": "6",
+      "imgUrl": "https://img.alicdn.com/imgextra/i1/790237325/O1CN01wr35BI23ytm42Jtxc_!!790237325.png?t=1585879844000",
+      "desc": "美食"
+    }, {
+      "id": "7",
+      "imgUrl": "https://img.alicdn.com/imgextra/i2/790237325/O1CN01SDDtRM23ytlukB0dN_!!790237325.png?t=1585879844000",
+      "desc": "车品"
+    }, {
+      "id": "8",
+      "imgUrl": "https://img.alicdn.com/imgextra/i4/790237325/O1CN01r8hYhx23ytlukAwSm_!!790237325.png?t=1585879843000",
+      "desc": "家电"
+    }]
+}
