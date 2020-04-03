@@ -2,8 +2,8 @@
     <div class="tab border-bottom">
         <div class="menu-wrapper" ref="menu-wrapper">
             <ul class="ul" ref="menu-ul">
-                <li class="menu-item " v-for="(item,index) of tabs" :key="index" @click="selectTab(index,item.cat,$event)">
-                    <span class="text " :class="{'active':number == index}">{{item.name}}</span>
+                <li class="menu-item " v-for="(item,index) of tabs" :key="index" @click="selectTab(index,item.adzone_id,item.material_id,$event)">
+                    <span class="text " :class="{'active':number == index}">{{item.title}}</span>
                 </li>
             </ul>
         </div>
@@ -18,7 +18,7 @@ export default {
     data () {
         return {
             number: 0,
-            tabs: [{'name': '精选', 'cat': '0'}, {'name': '女装', 'cat': '10'}, {'name': '男装', 'cat': '12'}, {'name': '鞋包配饰', 'cat': '5'}, {'name': '美妆', 'cat': '3'}, {'name': '母婴', 'cat': '2'}, {'name': '美食', 'cat': '6'}, {'name': '内衣', 'cat': '11'}, {'name': '数码家电', 'cat': '8'}, {'name': '鞋包配饰', 'cat': '5'}, {'name': '文体车品', 'cat': '7'}, {'name': '其他', 'cat': '9'}]
+            tabs: [{"adzone_id":"110172200064","material_id":3764,"title":"男装","subtitle":"200款商品"},{"adzone_id":"110172200064","material_id":3765,"title":"内衣","subtitle":"200款商品"},{"adzone_id":"110172200064","material_id":3760,"title":"母婴","subtitle":"200款商品"},{"adzone_id":"110172200064","material_id":3761,"title":"食品","subtitle":"200款商品"},{"adzone_id":"110172200064","material_id":3766,"title":"运动户外","subtitle":"200款商品"}]
         }
     },
     components: {
@@ -50,14 +50,14 @@ export default {
                 }
             })
         },
-        selectTab (index, cat, event) {
+        selectTab (index, adzoneId, materialId, event) {
             // better-scroll 可以监听到此事件，浏览器原生不能监听到  防止pc端出现两次点击
             if (!event._constructed) {
                 return
             }
             this.number = index
             // console.log(cat)
-            Bus.$emit('cat', cat)
+            Bus.$emit('cat', materialId)
         }
     }
 }

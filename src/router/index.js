@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Index from '@/pages/index/Index'
-import Kuai9 from '@/pages/kuai9/Kuai9'
+import Best from '@/pages/best/Best'
 import Classify from '@/pages/classify/Classify'
 import User from '@/pages/user/User'
 import Detail from '@/pages/detail/Detail'
@@ -24,9 +24,9 @@ export default new Router({
       }
     },
     {
-      path: '/kuai9',
-      name: 'Kuai9',
-      component: Kuai9,
+      path: '/best/:groupId',
+      name: 'Best',
+      component: Best,
       meta: {
         keepAlive: true, 
         isBack: false

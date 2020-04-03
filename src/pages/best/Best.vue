@@ -1,13 +1,13 @@
 <template>
     <div class="page">
         <tab></tab>
-        <sort></sort>
+        <!--<sort></sort>-->
         <div class="scroll" ref="scroll">
             <goods :goodslist="goodsList"></goods>
         </div>
-        <!-- <nice-title :type="1">9kuai9</nice-title> -->
+        <!-- <nice-title :type="1">Best</nice-title> -->
         <tab-bar></tab-bar>
-        <div class="bottom-tip" v-show="nodata">暂无数据</div>
+        <div class="bottom-tip" v-show="noData">暂无数据</div>
     </div>
 </template>
 
@@ -21,14 +21,14 @@ import Sort from 'common/sort/Sort'
 import Tab from 'common/tab/Tab'
 import Bus from '@/assets/js/eventBus'
 export default {
-    name: 'kuai9',
+    name: 'best',
     data () {
         return {
-            sortnumber: 1,
-            cat: 0,
+            adzoneId: 110172200064,
+            materialId: 3764,
             goodsList: [],
-            page: 1,
-            nodata: false,
+            pageNo: 1,
+            noData: false,
             total: ''
         }
     },
@@ -43,17 +43,17 @@ export default {
         Bus.$on('sortnumber', sortnumber => {
             if (sortnumber !== this.sortnumber) {
                 this.sortnumber = sortnumber
-                this.page = 1 
-                this.nodata = false 
+                this.pageNo = 1 
+                this.noData = false 
                 this.goodsList = []
                 this.getGoods()
             }
         })
-        Bus.$on('cat', cat => {
-            if (cat !== this.cat) {
-                this.cat = cat
-                this.page = 1 
-                this.nodata = false
+        Bus.$on('cat', materialId => {
+            if (materialId !== this.materialId) {
+                this.materialId = materialId
+                this.pageNo = 1 
+                this.noData = false
                 this.goodsList = []
                 this.getGoods()
             }
@@ -69,22 +69,23 @@ export default {
 
     methods: {
         getGoods: function () {
-            axios.get(process.env.API_ROOT + '/qingsoulist?app_key=OjRY3esp&v=1.0&max_price=10&sort=' + this.sortnumber + '&cat=' + this.cat + '&page=' + this.page + '&min_price=0&new=0&is_ju=0&is_ali=0&is_tqg=0')
+            axios.get(process.env.API_ROOT + '/taobao/getOptimusMaterial?adzone_id=' + this.adzoneId + '&material_id=' + this.materialId + '&page_no=' + this.pageNo)
             .then(this.handlegetGoods100Succ)  
         },
         handlegetGoods100Succ: function (res) {
             // console.log(res.data)
             let data = res.data
-            if (data.er_code === 10000 && data.data.list) {
-                if (this.page === 1) {
-                    this.goodsList = data.data.list
+            if (data.code === 200 && data.result.result_list.map_data) {
+                if (this.pageNo === 1) {
+                    this.goodsList = data.result.result_list.map_data
                 } else {
                     this.scroll.finishPullUp() // 告诉scroll已经加载完成
-                    console.log(this.page)
-                    this.goodsList.push.apply(this.goodsList, data.data.list)
+                    console.log(this.pageNo)
+                    this.goodsList.push.apply(this.goodsList, data.result.result_list.map_data)
                 }
-                this.total = data.data.total
-                this.page * 100 < this.total ? (this.nodata = false) : (this.nodata = true)
+                if (data.result.result_list.map_data.length < this.pageSize) {
+                    this.noData = true
+                }
             }
         },
         _initScroll () {
@@ -98,8 +99,8 @@ export default {
                         })
                         this.scroll.on('pullingUp', () => {
                             console.log('触底')
-                            this.page++
-                            !this.nodata && this.getGoods()
+                            this.pageNo++
+                            !this.noData && this.getGoods()
                         })
                     })
             } else {

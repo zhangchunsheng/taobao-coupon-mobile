@@ -7,10 +7,16 @@
                     首页
                 </div>
             </router-link>
-            <router-link to="/kuai9" tag="div" class="tabbar-item">
+            <router-link to="/best/1" tag="div" class="tabbar-item">
                 <div class="wrapper">
                     <i class="iconfont icon-uniE902"></i>
-                    9块9
+                    优质商品
+                </div>
+            </router-link>
+            <router-link to="/best/2" tag="div" class="tabbar-item">
+                <div class="wrapper">
+                    <i class="iconfont icon-11"></i>
+                    好券直播
                 </div>
             </router-link>
             <router-link to="/classify" tag="div" class="tabbar-item">
@@ -19,12 +25,12 @@
                     分类
                 </div>
             </router-link>
-            <router-link to="/user" tag="div" class="tabbar-item">
+            <!--<router-link to="/user" tag="div" class="tabbar-item">
                 <div class="wrapper">
                     <i class="iconfont icon-18"></i>
                     个人中心
                 </div>
-            </router-link>
+            </router-link>-->
         </div>
     </div>
 </template>
