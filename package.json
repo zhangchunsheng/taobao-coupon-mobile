@@ -1,7 +1,7 @@
 {
   "name": "taobao-coupon-mobile",
   "version": "1.0.0",
-  "description": "A Vue.js project",
+  "description": "A taobao coupon project",
   "author": "peter <1097692918@qq.com>",
   "private": true,
   "scripts": {
