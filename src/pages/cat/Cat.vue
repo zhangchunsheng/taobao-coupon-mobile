@@ -1,13 +1,13 @@
 <template>
     <div class="search-list">
         <cat-head class="header" :title="title"></cat-head>
-        <div class="sort-wrapper">
+        <!--<div class="sort-wrapper">
             <sort class="sort"></sort>
-        </div>
+        </div>-->
         <div class="wrapper" ref="wrapper">
             <goods :goodslist="goodsList"></goods>
         </div>
-        <div class="bottom-tip" v-show="nodata">暂无数据</div>
+        <div class="bottom-tip" v-show="noData">暂无数据</div>
     </div>
 </template>
 
@@ -22,14 +22,13 @@ export default {
     name: 'SearchList',
     data () {
         return {
-            key: '',
-            page: 1,
+            adzoneId: 0,
+            materialId: 0,
+            pageNo: 1,
+            pageSize: 20,
             goodsList: [],
-            total: '',
             title: '',
-            sortnumber: 1,
-            cat: 0,
-            nodata: false
+            noData: false
         }
     },
     watch: {
@@ -38,19 +37,19 @@ export default {
         }
     },
     created () {
-        // this.key = this.$route.params.key
-        // this.title = this.$route.params.title
-        // console.log(this.title)
-        // console.log(this.key)
+        // this.adzoneId = this.$route.params.adzoneId
+        // this.materialId = this.$route.params.materialId
+        // console.log(this.adzoneId)
+        // console.log(this.materialId)
         // console.log('created')
-        // this.getSearchList(this.key)
+        // this.getSearchList(this.adzoneId, this.materialId)
         Bus.$on('sortnumber', sortnumber => {
             if (sortnumber !== this.sortnumber) {
                 this.sortnumber = sortnumber 
-                this.page = 1 
-                this.nodata = false
+                this.pageNo = 1 
+                this.noData = false
                 this.goodsList = []
-                this.getSearchList(this.key)
+                this.getSearchList(this.adzoneId, this.materialId)
             }
         })
     },
@@ -71,30 +70,31 @@ export default {
                         })
                         this.scroll.on('pullingUp', () => {
                             console.log('触底')
-                            this.page++
-                            !this.nodata && this.getSearchList(this.key)
+                            this.pageNo++
+                            !this.noData && this.getSearchList(this.adzoneId, this.materialId)
                         })
                     })
             } else {
                 this.scroll.refresh()
             }
         },
-        getSearchList: function (key) {
-            axios.get(process.env.API_ROOT + '/qingsoulist?app_key=OjRY3esp&v=1.0&sort=' + this.sortnumber + '&cat=' + this.cat + '&page=' + this.page + '&min_price=0&max_price=10000000&new=0&is_ju=0&is_ali=0&is_tqg=0')
+        getSearchList: function (adzoneId, materialId) {
+            axios.get(process.env.API_ROOT + '/taobao/getOptimusMaterial?adzone_id=' + adzoneId + '&material_id=' + materialId + '&page_no=' + this.pageNo)
             .then(this.handlegetSearchListSucc)  
         },
         handlegetSearchListSucc: function (res) {
             let data = res.data
-            if (data.er_code === 10000) {
-                if (this.page === 1) {
-                    this.goodsList = data.data.list
+            if (data.code === 200) {
+                if (this.pageNo === 1) {
+                    this.goodsList = data.result.result_list.map_data
                 } else {
                     this.scroll.finishPullUp() // 告诉scroll已经加载完成
-                    console.log(this.page)
-                    this.goodsList.push.apply(this.goodsList, data.data.list)
+                    console.log(this.pageNo)
+                    this.goodsList.push.apply(this.goodsList, data.result.result_list.map_data)
                 }
-                this.total = data.data.total
-                this.page * 100 < this.total ? (this.nodata = false) : (this.nodata = true)
+                if (data.result.result_list.map_data.length < this.pageSize) {
+                    this.noData = true
+                }
                 // console.log(this.goodsList)
             }
         }
@@ -109,12 +109,13 @@ export default {
             to.meta.isBack = true
         } else {
             // console.log('新进入的')
-            vm.cat = vm.$route.params.cat
-            vm.title = vm.$route.params.title
-            vm.nodata = false
-            vm.page = 1
+            vm.adzoneId = vm.$route.params.adzoneId
+            vm.materialId = vm.$route.params.materialId
+            vm.title = vm.$route.params.channelName
+            vm.noData = false
+            vm.pageNo = 1
             vm.goodsList = []
-            vm.getSearchList(vm.key)
+            vm.getSearchList(vm.adzoneId, vm.materialId)
         }
         })
     }
@@ -136,7 +137,7 @@ export default {
         z-index: 1000
     .wrapper
         position: absolute 
-        top: 1.6rem
+        top: 1.0rem
         left: 0
         bottom: 0
         right: 0

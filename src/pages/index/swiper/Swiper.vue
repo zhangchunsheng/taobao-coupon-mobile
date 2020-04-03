@@ -2,8 +2,8 @@
   <div class="wrapper">
     <swiper :options="swiperOption" ref="mySwiper" v-if="showSwiper">
       <!-- slides -->
-      <swiper-slide v-for="item of list" :key="item.id">
-        <img class="swiper-img" :src="item.imgUrl" >
+      <swiper-slide v-for="item of list" :key="item.material_id">
+        <img class="swiper-img" :src="item.icon" @click="selecteCat(item.adzone_id,item.material_id,item.channel_name)">
       </swiper-slide>
       <!-- Optional controls -->
       <div class="swiper-pagination"  slot="pagination"></div>
@@ -39,7 +39,15 @@ export default {
      swiper () {
         return this.$refs.mySwiper.swiper
     }
-   } 
+   },
+   methods: {
+        selecteCat: function (adzoneId, materialId, channelName) {
+            this.adzoneId = adzoneId
+            this.materialId = materialId
+            this.channelName = channelName
+            this.$router.push({name: 'Cat', params: {'adzoneId': adzoneId, 'materialId': materialId, 'channelName': channelName}})
+        }
+    }
 }
 </script>
 

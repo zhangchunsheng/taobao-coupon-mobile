@@ -76,14 +76,17 @@ export default {
         }
     },
     getInfo: function () {
-        axios.get('/taobaoapi/index.json')
+        axios.get(process.env.API_ROOT + '/coupon/getIndexData')
         .then(this.handleGitInfoSucc)
     },
     handleGitInfoSucc: function (res) {
         const data = res.data
-        // console.log(data)
-        this.swiperList = data.swiper
-        this.iconlist = data.iconList
+        console.log(data)
+        if (data.code === 200) {
+          this.swiperList = data.result.swiper
+          this.iconlist = data.result.channel  
+        }
+        
         // DOM 更新了 操作dom时一定要在$nextTick里
         this.$nextTick(() => {
             // this._initScroll()

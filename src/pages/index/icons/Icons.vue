@@ -2,11 +2,11 @@
     <div class="icons">
         <swiper :options="swiperOption">
             <swiper-slide v-for="(page,index) of pages" :key="index">
-                <div class="icon" v-for="(item,index) of page" :key="index" @click="selecteCat(item.id,item.desc)">
+                <div class="icon" v-for="(item,index) of page" :key="index" @click="selecteCat(item.adzone_id,item.material_id,item.channel_name)">
                     <div class="icon-img">
-                        <img class="icon-img-content" :src="item.imgUrl">
+                        <img class="icon-img-content" :src="item.icon">
                     </div>
-                    <p class="icon-desc">{{item.desc}}</p>
+                    <p class="icon-desc">{{item.channel_name}}</p>
                 </div>
             </swiper-slide>
             <div class="swiper-pagination"  slot="pagination"></div>
@@ -28,7 +28,8 @@ export default {
                 autoplay: false,
                 preventClicksPropagation: true // 阻止click冒泡。拖动Swiper时阻止click事件。
             },
-            cat: 0
+            adzoneId: 0,
+            materialId: 0
         }
     },
      computed: {
@@ -45,9 +46,11 @@ export default {
         }
     },
     methods: {
-        selecteCat: function (cat, title) {
-            this.cat = cat
-            this.$router.push({name: 'Cat', params: {'cat': cat, 'title': title}})
+        selecteCat: function (adzoneId, materialId, channelName) {
+            this.adzoneId = adzoneId
+            this.materialId = materialId
+            this.channelName = channelName
+            this.$router.push({name: 'Cat', params: {'adzoneId': adzoneId, 'materialId': materialId, 'channelName': channelName}})
         }
     }
 }

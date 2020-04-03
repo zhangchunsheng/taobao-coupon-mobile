@@ -78,7 +78,7 @@ export default new Router({
       }
     },
     {
-      path: '/cat/:cat',
+      path: '/cat/:adzoneId/:materialId/:channelName',
       name: 'Cat',
       component: Cat,
       meta: {
