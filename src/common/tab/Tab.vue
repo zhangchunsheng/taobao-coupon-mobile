@@ -15,10 +15,14 @@ import BScroll from 'better-scroll'
 import Bus from '@/assets/js/eventBus'
 export default {
     name: '',
+    props: {
+        tabs: {
+            type: Array
+        }
+    },
     data () {
         return {
-            number: 0,
-            tabs: [{"adzone_id":"110172200064","material_id":3764,"title":"男装","subtitle":"200款商品"},{"adzone_id":"110172200064","material_id":3765,"title":"内衣","subtitle":"200款商品"},{"adzone_id":"110172200064","material_id":3760,"title":"母婴","subtitle":"200款商品"},{"adzone_id":"110172200064","material_id":3761,"title":"食品","subtitle":"200款商品"},{"adzone_id":"110172200064","material_id":3766,"title":"运动户外","subtitle":"200款商品"}]
+            number: 0
         }
     },
     components: {

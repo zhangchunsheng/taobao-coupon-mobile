@@ -84,7 +84,14 @@ export default {
         console.log(data)
         if (data.code === 200) {
           this.swiperList = data.result.swiper
-          this.iconlist = data.result.channel  
+          this.iconlist = data.result.channel
+          let materials = data.result.materials
+          let materialsobj = {}
+          for (let i in materials) {
+            materialsobj[materials[i].group_id] = materials[i]
+          }
+          data.result.materialsobj = materialsobj
+          window.lm_c_data = data.result
         }
         
         // DOM 更新了 操作dom时一定要在$nextTick里

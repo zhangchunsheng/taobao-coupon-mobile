@@ -24,7 +24,7 @@ export default new Router({
       }
     },
     {
-      path: '/best/:groupId',
+      path: '/best/',
       name: 'Best',
       component: Best,
       meta: {

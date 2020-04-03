@@ -7,13 +7,13 @@
                     首页
                 </div>
             </router-link>
-            <router-link to="/best/1" tag="div" class="tabbar-item">
+            <router-link to="/best" tag="div" class="tabbar-item">
                 <div class="wrapper">
                     <i class="iconfont icon-uniE902"></i>
                     优质商品
                 </div>
             </router-link>
-            <router-link to="/best/2" tag="div" class="tabbar-item">
+            <router-link to="/best" tag="div" class="tabbar-item">
                 <div class="wrapper">
                     <i class="iconfont icon-11"></i>
                     好券直播
