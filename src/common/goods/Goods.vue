@@ -3,17 +3,17 @@
         <div class="goods-item" v-for="(item,index) of goodslist" :key="index" @click="detail(item,$event)">
             <div class="goods-item-wrapper">
                 <div class="icon">
-                    <img class="img" v-lazy="item.goods_pic" src="" :alt="item.goods_short_title">
+                    <img class="img" v-lazy="item.pict_url" src="" :alt="item.title">
                 </div>
                 <div class="desc">
-                    <h1 class="title">{{item.goods_short_title}}</h1>
+                    <h1 class="title">{{item.title}}</h1>
                     <div class="row-price">
-                        <div class="goods-price">原价 {{item.goods_price}}</div>
-                        <div class="goods-sales">已售 {{item.goods_sales}}</div>
+                        <div class="goods-price">原价 {{item.zk_final_price}}</div>
+                        <div class="goods-sales">已售 {{item.volume}}</div>
                     </div>
                     <div class="row-coupon"> 
-                        <div class="quanhou">券后 {{item.goods_price-item.coupon_price | round}}</div>
-                        <div class="coupon-price">{{item.coupon_price | parseInt}}元券</div>
+                        <div class="quanhou">券后 {{item.zk_final_price | round}}</div>
+                        <div class="coupon-price">{{item.coupon_amount | parseInt}}元券</div>
                     </div>
                 </div>
             </div>
