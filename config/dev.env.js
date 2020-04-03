@@ -4,5 +4,5 @@ const prodEnv = require('./prod.env')
 
 module.exports = merge(prodEnv, {
   NODE_ENV: '"development"',
-  API_ROOT: '"http://coupon-collect.luomor.com/"'
+  API_ROOT: '"https://coupon-collect.luomor.com"'
 })

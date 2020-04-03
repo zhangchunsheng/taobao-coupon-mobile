@@ -35,6 +35,8 @@ node skeleton.js
 ## 请在谷歌网络浏览器下预览，解决axios跨域问题请在后端配置   mac 命令行打开谷歌浏览器open -n /Applications/Google\ Chrome.app/ --args --disable-web-security  --user-data-dir=自定义存储位置
 ###部分截图事例
 
+open -n /Applications/Google\ Chrome.app/ --args --disable-web-security
+
 The CLI moved into a separate package: webpack-cli
 Please install 'webpack-cli' in addition to webpack itself to use the CLI
 -> When using npm: npm i -D webpack-cli

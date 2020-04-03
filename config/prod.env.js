@@ -1,5 +1,5 @@
 'use strict'
 module.exports = {
   NODE_ENV: '"production"',
-  API_ROOT: '"http://coupon-collect.luomor.com/"'
+  API_ROOT: '"https://coupon-collect.luomor.com"'
 }

@@ -91,13 +91,15 @@ export default {
         })
     },
     getTop100: function () {
-        axios.get(process.env.API_ROOT + '/taobao/getOptimusMaterial?adzone_id=110127200290&material_id=19812')
+        axios.get(process.env.API_ROOT + '/taobao/getOptimusMaterial?adzone_id=110127200290&material_id=3763')
         .then(this.handleGitTop100Succ)
     },
     handleGitTop100Succ: function (res) {
-        // console.log(res)
-        if (res.ret_code === 200) {
-            this.goodsList = res.result.result_list.map_data
+        console.log(res)
+        let data = res.data
+        // debugger
+        if (data.code === 200) {
+            this.goodsList = data.result.result_list.map_data
         }
     }
   },

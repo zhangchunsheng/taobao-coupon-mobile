@@ -8,11 +8,11 @@
                 <div class="desc">
                     <h1 class="title">{{item.title}}</h1>
                     <div class="row-price">
-                        <div class="goods-price">原价 {{item.zk_final_price}}</div>
+                        <div class="goods-price">原价 {{item.reserve_price}}</div>
                         <div class="goods-sales">已售 {{item.volume}}</div>
                     </div>
                     <div class="row-coupon"> 
-                        <div class="quanhou">券后 {{item.zk_final_price | round}}</div>
+                        <div class="quanhou">券后 {{item.zk_final_price}}</div>
                         <div class="coupon-price">{{item.coupon_amount | parseInt}}元券</div>
                     </div>
                 </div>

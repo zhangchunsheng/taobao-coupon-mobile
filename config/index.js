@@ -17,11 +17,15 @@ module.exports = {
         pathRewrite:{
           '^/taobaoapi':'/static'
         }
+      },
+      'https://coupon-collect.luomor.com/':{
+        target:'https://coupon-collect.luomor.com/',
+        changeOrigin: true,
       }
     },
 
     // Various Dev Server settings
-    host: 'localhost', // can be overwritten by process.env.HOST
+    host: 'tb-t.luomor.com', // can be overwritten by process.env.HOST
     port: 8080, // can be overwritten by process.env.PORT, if port is in use, a free one will be determined
     autoOpenBrowser: false,
     errorOverlay: true,
@@ -58,7 +62,7 @@ module.exports = {
     // Paths
     assetsRoot: path.resolve(__dirname, '../dist'),
     assetsSubDirectory: 'static',
-    assetsPublicPath: '/taobao-coupon-mobile/',
+    assetsPublicPath: '/',
 
     /**
      * Source Maps

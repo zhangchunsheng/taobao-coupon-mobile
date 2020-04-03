@@ -9,17 +9,17 @@
                 <div class="item" v-for="(item,index) of goodslist" :key="index" @click="detail(item,$event)">
                     <div class="item-wrapper">
                         <div class="icon">
-                            <img :src="item.goods_pic" alt="" class="img">
+                            <img :src="item.pict_url" alt="" class="img">
                             <div class="tip">
-                                <span class="goods-sales">{{item.goods_sales | towan}}万人已领 |</span>
-                                <span class="coupon-price">{{item.coupon_price | parseInt}}元券</span>
+                                <span class="goods-sales">{{item.coupon_remain_count | towan}}万人已领 |</span>
+                                <span class="coupon-price">{{item.coupon_amount | parseInt}}元券</span>
                             </div>
                         </div>
                         <div class="desc">
-                            <h1 class="title">{{item.goods_short_title}}</h1>
+                            <h1 class="title">{{item.title}}</h1>
                             <div class="price">
-                                <span class="quanhou">￥ {{item.goods_price-item.coupon_price | round}}</span>
-                                <span class="goods-price">￥ {{item.goods_price }}</span>
+                                <span class="quanhou">￥ {{item.zk_final_price}}</span>
+                                <span class="goods-price">￥ {{item.reserve_price }}</span>
                             </div>
                         </div>
                     </div>
