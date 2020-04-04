@@ -3,21 +3,21 @@
         <div class="menu-wrapper" ref="menu-wrapper">
             <ul>
                 <li v-for="(item,index) of goods" :key="index" class="menu-item border-bottom" :class="{'current':currentIndex===index}" @click="selectMenu(index,$event)">
-                    <span class="text">{{item.name}}</span>
+                    <span class="text">{{item.title}}</span>
                 </li>
             </ul>
         </div>
-        <div class="foods-wrapper" v-show="goods" ref="foods-wrapper">
+        <div class="materials-wrapper" v-show="goods" ref="materials-wrapper">
             <ul>
-                <li v-for="(item, index) of goods" :key="index" class="food-list food-list-hook">
-                    <h1 class="title border-bottom">{{item.name}}</h1>
-                    <ul class="foods-ul">
-                        <li @click="selectFood(food,$event)" v-for="(food, ind) of item.foods" :key="ind" class="food-item">
+                <li v-for="(item, index) of goods" :key="index" class="material-list material-list-hook">
+                    <h1 class="title border-bottom">{{item.title}}</h1>
+                    <ul class="materials-ul">
+                        <li @click="selectMaterial(material,$event)" v-for="(material, ind) of item.sub_materials" :key="ind" class="material-item">
                             <div class="icon">
-                                <img :src="food.icon" alt="" class="img">
+                                <img :src="material.icon" alt="" class="img">
                             </div>
                             <div class="content">
-                                <h2 class="name">{{food.name}}</h2>
+                                <h2 class="name">{{material.title}}</h2>
                             </div>
                         </li>
                     </ul>
@@ -51,45 +51,47 @@ export default {
             goods: [],
             listHeight: [],
             scrollY: 0,
-            selectedFood: {}
+            selectedMaterial: {},
+            currentIndexNum: 0
         }
     },
     computed: {
         currentIndex () {
-            for (let i = 0; i < this.listHeight.length; i++) {
+            return this.currentIndexNum
+            /* for (let i = 0; i < this.listHeight.length; i++) {
                 let height1 = this.listHeight[i]
                 let height2 = this.listHeight[i + 1]
                 if (!height2 || (this.scrollY >= height1 && this.scrollY < height2)) {
                     return i
                 }
             }
-            return 0
+            return 0 */
         },
-        selectFoods () {
-            let foods = []
+        selectedMaterials () {
+            let materials = []
             this.goods.forEach((good) => {
-                good.foods.forEach((food) => {
-                    if (food.count) {
-                        foods.push(food)
-                    }
+                good.sub_materials.forEach((material) => {
+                    materials.push(material)
                 })
             })
-            return foods
+            return materials
         }
     },
     methods: {
         getInfo: function () {
-            axios.get('/taobaoapi/goods.json')
+            axios.get(process.env.API_ROOT + '/coupon/getIndexData')
             .then(this.handleGitInfoSucc)  
         },
         handleGitInfoSucc: function (res) {
             const data = res.data
             // console.log(data)
-            this.goods = data
-            for (let i = 0; i < this.goods.length; i++) {
-                if (this.goods[i].foods) {
-                    for (let r = 0; r < this.goods[i].foods.length; r++) {
-                        this.goods[i].foods[r].icon = require('@/assets/images' + this.goods[i].foods[r].icon)
+            if (data.code === 200) {
+              this.goods = data.result.materials
+                for (let i = 0; i < this.goods.length; i++) {
+                    if (this.goods[i].sub_materials) {
+                        for (let r = 0; r < this.goods[i].sub_materials.length; r++) {
+                            
+                        }
                     }
                 }
             }
@@ -103,22 +105,22 @@ export default {
             this.menuScroll = new BScroll(this.$refs['menu-wrapper'], {
                 click: true
             }) 
-            this.FoodsScroll = new BScroll(this.$refs['foods-wrapper'], {
+            this.MaterialsScroll = new BScroll(this.$refs['materials-wrapper'], {
                 probeType: 3,
                 click: true
             })
-            this.FoodsScroll.on('scroll', (pos) => {
+            this.MaterialsScroll.on('scroll', (pos) => {
                 this.scrollY = Math.abs(Math.round(pos.y)) + 200
             })
         },
         _calculateHeight: function () {
-            const element = this.$refs['foods-wrapper']
-            let foodList = element.getElementsByClassName('food-list-hook')
-            // console.log(foodList)
+            const element = this.$refs['materials-wrapper']
+            let materialList = element.getElementsByClassName('material-list-hook')
+            // console.log(materialList)
             let height = 0
             this.listHeight.push(height)
-            for (let i = 0; i < foodList.length; i++) {
-                let item = foodList[i]
+            for (let i = 0; i < materialList.length; i++) {
+                let item = materialList[i]
                 height += item.clientHeight
                 this.listHeight.push(height)
             } 
@@ -130,19 +132,20 @@ export default {
                 return
             }
             // 获取食物的li Dom节点列表
-            const element = this.$refs['foods-wrapper']
-            let foodList = element.getElementsByClassName('food-list-hook')
-            let el = foodList[index]
+            const element = this.$refs['materials-wrapper']
+            let materialList = element.getElementsByClassName('material-list-hook')
+            let el = materialList[index]
+            this.currentIndexNum = index
             // 调用better-scroll 方法滚动到响应位置
-            this.FoodsScroll.scrollToElement(el, 300)
+            this.MaterialsScroll.scrollToElement(el, 300)
         },
-        selectFood: function (food, event) {
+        selectMaterial: function (material, event) {
             if (!event._constructed) {
                 return
             }
-            this.selectedFood = food.key
-            // console.log(this.selectedFood)
-            this.$router.push({name: 'SearchList', params: {'key': this.selectedFood, 'cat': food.cat}})
+            this.materialId = material.material_id
+            // console.log(this.materialId)
+            this.$router.push({name: 'Cat', params: {'adzoneId': material.adzone_id, 'materialId': this.materialId, 'channelName': material.title}})
         }
     }
     
@@ -183,16 +186,16 @@ export default {
                     vertical-align: middle
                     font-size: .24rem 
                     text-align: center
-        .foods-wrapper
+        .materials-wrapper
             flex: 1
             .title
                 height: .8rem
                 line-height: .8rem
                 background: #f3f5f7
-            .foods-ul
+            .materials-ul
                 overflow: hidden
                 padding: .4rem  0
-                .food-item
+                .material-item
                     float: left 
                     width: 33.33%
                     text-align: center

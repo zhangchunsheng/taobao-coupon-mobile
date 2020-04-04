@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Index from '@/pages/index/Index'
 import Best from '@/pages/best/Best'
+import Moch from '@/pages/moch/Moch'
 import Classify from '@/pages/classify/Classify'
 import User from '@/pages/user/User'
 import Detail from '@/pages/detail/Detail'
@@ -27,6 +28,15 @@ export default new Router({
       path: '/best/',
       name: 'Best',
       component: Best,
+      meta: {
+        keepAlive: true, 
+        isBack: false
+      }
+    },
+    {
+      path: '/moch/',
+      name: 'Moch',
+      component: Moch,
       meta: {
         keepAlive: true, 
         isBack: false
@@ -69,7 +79,7 @@ export default new Router({
       }
     },
     {
-      path: '/searchlist/:key/:cat',
+      path: '/searchlist/:key',
       name: 'SearchList',
       component: SearchList,
       meta: {

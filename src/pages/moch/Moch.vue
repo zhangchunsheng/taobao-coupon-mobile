@@ -5,7 +5,7 @@
         <div class="scroll" ref="scroll">
             <goods :goodslist="goodsList"></goods>
         </div>
-        <!-- <nice-title :type="1">Best</nice-title> -->
+        <!-- <nice-title :type="1">Moch</nice-title> -->
         <tab-bar></tab-bar>
         <div class="bottom-tip" v-show="noData">暂无数据</div>
     </div>
@@ -21,10 +21,10 @@ import Sort from 'common/sort/Sort'
 import Tab from 'common/tab/Tab'
 import Bus from '@/assets/js/eventBus'
 export default {
-    name: 'best',
+    name: 'moch',
     data () {
         return {
-            groupId: 5,
+            groupId: 6,
             adzoneId: 110172200064,
             materialId: 3764,
             goodsList: [],

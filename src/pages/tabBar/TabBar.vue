@@ -13,10 +13,10 @@
                     优质商品
                 </div>
             </router-link>
-            <router-link to="/best" tag="div" class="tabbar-item">
+            <router-link to="/moch" tag="div" class="tabbar-item">
                 <div class="wrapper">
-                    <i class="iconfont icon-11"></i>
-                    好券直播
+                    <i class="iconfont icon-8"></i>
+                    母婴主题
                 </div>
             </router-link>
             <router-link to="/classify" tag="div" class="tabbar-item">

@@ -6,7 +6,7 @@
         <div class="wrapper" ref="wrapper">
             <goods :goodslist="goodsList"></goods>
         </div>
-        <div class="bottom-tip" v-show="nodata">暂无数据</div>
+        <div class="bottom-tip" v-show="noData">暂无数据</div>
     </div>
 </template>
 
@@ -21,13 +21,12 @@ export default {
     data () {
         return {
             key: '',
-            page: 1,
+            pageNo: 1,
             goodsList: [],
             total: '',
             title: '',
             sortnumber: 1,
-            cat: 0,
-            nodata: false
+            noData: false
         }
     },
     watch: {
@@ -45,8 +44,8 @@ export default {
         Bus.$on('sortnumber', sortnumber => {
             if (sortnumber !== this.sortnumber) {
                 this.sortnumber = sortnumber
-                this.page = 1 
-                this.nodata = false
+                this.pageNo = 1 
+                this.noData = false
                 this.goodsList = []
                 this.getSearchList(this.key)
             }
@@ -68,8 +67,8 @@ export default {
                         })
                         this.scroll.on('pullingUp', () => {
                             console.log('触底')
-                            this.page++
-                            !this.nodata && this.getSearchList(this.key)
+                            this.pageNo++
+                            !this.noData && this.getSearchList(this.key)
                         })
                     })
             } else {
@@ -83,17 +82,17 @@ export default {
         handlegetSearchListSucc: function (res) {
             let data = res.data
             if (data.er_code === 10000) {
-                if (this.page === 1) {
+                if (this.pageNo === 1) {
                     this.goodsList = data.data.list
                 } else {
                     this.scroll.finishPullUp() // 告诉scroll已经加载完成
-                    console.log(this.page)
+                    console.log(this.pageNo)
                     this.goodsList.push.apply(this.goodsList, data.data.list)
                 }
                 this.total = data.data.total
                 console.log(this.total)
-                this.page * 100 < this.total ? (this.nodata = false) : (this.nodata = true)
-                console.log(this.nodata)
+                this.pageNo * 100 < this.total ? (this.noData = false) : (this.noData = true)
+                console.log(this.noData)
                 // console.log(this.goodsList)
             }
         }
@@ -109,12 +108,8 @@ export default {
         } else {
             // console.log('新进入的')
             vm.key = vm.$route.params.key
-            // console.log(vm.$route.params.cat)
-            if (vm.$route.params.cat) {
-                vm.cat = vm.$route.params.cat
-            }
-            vm.page = 1 
-            vm.nodata = false
+            vm.pageNo = 1 
+            vm.noData = false
             vm.goodsList = []
             vm.getSearchList(vm.key)
         }

@@ -137,7 +137,7 @@ export default {
         z-index: 1000
     .wrapper
         position: absolute 
-        top: 1.0rem
+        top: 0.9rem
         left: 0
         bottom: 0
         right: 0
