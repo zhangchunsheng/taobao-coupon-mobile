@@ -26,7 +26,7 @@
                         <span class="goods-price"> 原价{{data.reserve_price}}</span>
                         <!--<span class="favorite" :class="{'favorited':favorited}" @click="favorite">{{favorited ? '已收藏':'收藏'}} <i class="icon-14"></i></span>-->
                     </div>
-                    <div class="quan-info" @click="buy" >
+                    <div class="quan-info" @click="getCoupon" >
                         <div class="desc">
                             <div class="left">
                                 <div class="wrapper">
@@ -129,9 +129,9 @@ export default {
                 this.scroll.refresh()
             }
         },
-        buy: function () {
+        getCoupon: function () {
             if (!this.TpwdTip) { // 二次点击直接显示不请求
-                axios.get('http://coupon-collect.luomor.com/coupon/getTPwd?item_id=' + this.data.item_id + '&title=' + this.data.title)
+                axios.get('https://coupon-collect.luomor.com/coupon/getTPwd?click_url=' + this.data.click_url + '&coupon_share_url=' + this.data.coupon_share_url + '&title=' + this.data.title)
                 .then(this.handleTpwdSucc) 
             } else {
                 this.tpwdMask = true
@@ -139,9 +139,16 @@ export default {
         },
         handleTpwdSucc: function (res) {
             let data = res.data
-            this.TpwdTip = '复制框内整段文字，打开【手淘APP】即可领券购买。' + data.data.model
+            let couponTpwd = data.result.coupon_tpwd
+            let tpwd = data.result.tpwd
+            if (couponTpwd !== '') {
+                this.TpwdTip = '复制框内整段文字，打开【手淘APP】即可领券购买。' + couponTpwd
+            } else {
+                this.TpwdTip = '复制框内整段文字，打开【手淘APP】即可立即购买。' + tpwd
+            }
+            
             this.tpwdMask = true
-            // console.log(data.data.model)
+            // console.log(data.result)
         },
         favorite: function () { // 收藏
             if (!this.favorited) {
