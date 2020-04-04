@@ -1,97 +1,97 @@
 export function saveToLocal (id, key, value) {
-    let djzk = window.localStorage.__djzk__
-    if (!djzk) {
-        djzk = {}
-        djzk[key] = {}
-        djzk[key][id] = value
+    let lmsq = window.localStorage.__lmsq__
+    if (!lmsq) {
+        lmsq = {}
+        lmsq[key] = {}
+        lmsq[key][id] = value
     } else {
-        djzk = JSON.parse(djzk)
-        if (!djzk[key]) {
-            djzk[key] = {}
+        lmsq = JSON.parse(lmsq)
+        if (!lmsq[key]) {
+            lmsq[key] = {}
         }
     }
-    djzk[key][id] = value
-    window.localStorage.__djzk__ = JSON.stringify(djzk)
+    lmsq[key][id] = value
+    window.localStorage.__lmsq__ = JSON.stringify(lmsq)
 }
 export function deleteToLocal (id, key, def) {
-    let djzk = window.localStorage.__djzk__
-    if (!djzk) {
+    let lmsq = window.localStorage.__lmsq__
+    if (!lmsq) {
         return def
     }
-    djzk = JSON.parse(djzk)
-    if (!djzk[key]) {
+    lmsq = JSON.parse(lmsq)
+    if (!lmsq[key]) {
         return def
     }
     let obj = {}
-    for (let k in djzk[key]) {
+    for (let k in lmsq[key]) {
         if (id !== k) {
-            obj[k] = djzk[key][k]
+            obj[k] = lmsq[key][k]
         }
     }
-    djzk[key] = obj
-    window.localStorage.__djzk__ = JSON.stringify(djzk)
+    lmsq[key] = obj
+    window.localStorage.__lmsq__ = JSON.stringify(lmsq)
 }
 export function loadFromLocal (id, key, def) {
-    let djzk = window.localStorage.__djzk__
-    if (!djzk) {
+    let lmsq = window.localStorage.__lmsq__
+    if (!lmsq) {
         return def
     }
-    djzk = JSON.parse(djzk)[key]
-    if (!djzk) {
+    lmsq = JSON.parse(lmsq)[key]
+    if (!lmsq) {
         return def
     }
     let ret
     if (id) {
-        ret = djzk[id]
+        ret = lmsq[id]
     } else {
-        ret = djzk
+        ret = lmsq
     }
     return ret || def
 }
 
 export function saveKeyToLocal (key, value) {
-    let djzk = window.localStorage.__djzk__
-    if (!djzk) {
-        djzk = {}
-        djzk[key] = []
-        djzk[key] = [value]
+    let lmsq = window.localStorage.__lmsq__
+    if (!lmsq) {
+        lmsq = {}
+        lmsq[key] = []
+        lmsq[key] = [value]
     } else {
-        djzk = JSON.parse(djzk)
-        if (!djzk[key]) {
-            djzk[key] = []
+        lmsq = JSON.parse(lmsq)
+        if (!lmsq[key]) {
+            lmsq[key] = []
         }
-        if (djzk[key].indexOf(value) === -1) {
-            if (djzk[key].length > 19) {
-                djzk[key].pop()
+        if (lmsq[key].indexOf(value) === -1) {
+            if (lmsq[key].length > 19) {
+                lmsq[key].pop()
             }
-            djzk[key].unshift(value)
+            lmsq[key].unshift(value)
         } else {
             return 
         }
     }
-    window.localStorage.__djzk__ = JSON.stringify(djzk)
+    window.localStorage.__lmsq__ = JSON.stringify(lmsq)
 }
 
 export function loadKeyFromLocal (key, def) {
-    let djzk = window.localStorage.__djzk__
-    if (!djzk) {
+    let lmsq = window.localStorage.__lmsq__
+    if (!lmsq) {
         return def
     }
-    djzk = JSON.parse(djzk)[key]
-    if (!djzk) {
+    lmsq = JSON.parse(lmsq)[key]
+    if (!lmsq) {
         return def
     }
-    let ret = djzk
+    let ret = lmsq
     return ret || def
 }
 export function clearKeyToLocal (key, def) {
-    let djzk = window.localStorage.__djzk__
-    if (!djzk) {
-        djzk = {}
-        djzk[key] = []
+    let lmsq = window.localStorage.__lmsq__
+    if (!lmsq) {
+        lmsq = {}
+        lmsq[key] = []
         return def
     }
-    djzk = JSON.parse(djzk)
-    djzk[key] = []
-    window.localStorage.__djzk__ = JSON.stringify(djzk)
+    lmsq = JSON.parse(lmsq)
+    lmsq[key] = []
+    window.localStorage.__lmsq__ = JSON.stringify(lmsq)
 }

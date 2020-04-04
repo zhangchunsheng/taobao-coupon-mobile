@@ -21,7 +21,7 @@
   			<div class="list">
   				<h5>热门推荐</h5>
   				<div class="keyword" id="key">
-  				<span v-for="(item,index) of keyword" @click="searchkey(item.word)" :key="index" >{{item.word}}</span>
+  				<span v-for="(item,index) of keyword" @click="searchkey(item)" :key="index" >{{item}}</span>
   				</div>
   			</div>
         </div>
@@ -29,7 +29,7 @@
 </template>
 
 <script type="text/ecmascript-6">
-import axios from 'axios'
+// import axios from 'axios'
 import {saveKeyToLocal, loadKeyFromLocal, clearKeyToLocal} from '@/assets/js/Store'
 export default {
     name: 'Search',
@@ -66,13 +66,32 @@ export default {
             // console.log(keywords)
         },
         getHotKeyWords: function () {
-            axios.get(process.env.API_ROOT + '/taobao/getMaterial')
-            .then(this.handlegetHotKeyWordsSucc)  
+            // axios.get(process.env.API_ROOT + '/coupon/getIndexData')
+            // .then(this.handlegetHotKeyWordsSucc)
+            this.keyword = [
+                '面膜',
+                '耳机',
+                '抖音',
+                '小白鞋',
+                '防晒霜',
+                '口红',
+                '连衣裙',
+                '短袖女',
+                '女装',
+                '零食',
+                '充电宝',
+                '拖鞋',
+                '凉鞋女',
+                '防晒喷雾',
+                '女鞋',
+                '风扇',
+                '零食礼包'
+                ]
         },
         handlegetHotKeyWordsSucc: function (res) {
             let data = res.data
-            if (data.er_code === 10000) {
-                this.keyword = data.data.slice(0, 20)
+            if (data.code === 200) {
+                this.keyword = data.result.hot_keyword.slice(0, 20)
             }
         }
     }

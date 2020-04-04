@@ -1,8 +1,9 @@
 <template>
     <div class="search-list">
-        <div class="sort-wrapper">
+        <cat-head class="header" :title="title"></cat-head>
+        <!--<div class="sort-wrapper">
             <sort class="sort"></sort>
-        </div>
+        </div>-->
         <div class="wrapper" ref="wrapper">
             <goods :goodslist="goodsList"></goods>
         </div>
@@ -12,6 +13,7 @@
 
 <script type="text/ecmascript-6">
 import axios from 'axios'
+import CatHead from 'common/head/Head'
 import Goods from 'common/goods/Goods'
 import BScroll from 'better-scroll'
 import Sort from 'common/sort/Sort'
@@ -36,8 +38,6 @@ export default {
     },
     created () {
         // this.key = this.$route.params.key
-        // this.title = this.$route.params.title
-        // console.log(this.title)
         // console.log(this.key)
         // console.log('created')
         // this.getSearchList(this.key)
@@ -53,7 +53,8 @@ export default {
     },
     components: {
         Goods,
-        Sort
+        Sort,
+        CatHead
     },
     methods: {
         _initScroll () {
@@ -76,24 +77,22 @@ export default {
             }
         },
         getSearchList: function (key) {
-            axios.get(process.env.API_ROOT + '/taobao/getMaterial')
+            axios.get(process.env.API_ROOT + '/taobao/getMaterial?q=' + key + '&adzone_id=110127200290')
             .then(this.handlegetSearchListSucc)  
         },
         handlegetSearchListSucc: function (res) {
             let data = res.data
-            if (data.er_code === 10000) {
+            if (data.code === 200) {
                 if (this.pageNo === 1) {
-                    this.goodsList = data.data.list
+                    this.goodsList = data.result.result_list.map_data
                 } else {
                     this.scroll.finishPullUp() // 告诉scroll已经加载完成
                     console.log(this.pageNo)
-                    this.goodsList.push.apply(this.goodsList, data.data.list)
+                    this.goodsList.push.apply(this.goodsList, data.result.result_list.map_data)
                 }
-                this.total = data.data.total
-                console.log(this.total)
-                this.pageNo * 100 < this.total ? (this.noData = false) : (this.noData = true)
-                console.log(this.noData)
-                // console.log(this.goodsList)
+                if (data.result.result_list.map_data.length < this.pageSize) {
+                    this.noData = true
+                }
             }
         }
     },
@@ -108,6 +107,7 @@ export default {
         } else {
             // console.log('新进入的')
             vm.key = vm.$route.params.key
+            vm.title = vm.$route.params.key
             vm.pageNo = 1 
             vm.noData = false
             vm.goodsList = []
@@ -127,7 +127,7 @@ export default {
         z-index: 1000
     .wrapper
         position: absolute 
-        top: .8rem
+        top: .9rem
         left: 0
         bottom: 0
         right: 0
