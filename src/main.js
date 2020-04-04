@@ -2,6 +2,7 @@
 // (runtime-only or standalone) has been set in webpack.base.conf with an alias.
 import Vue from 'vue'
 import App from './App'
+import Router from 'vue-router'
 import router from './router'
 import fastClick from 'fastclick'
 import vueAwesomeSwiper from 'vue-awesome-swiper'
@@ -21,6 +22,11 @@ Vue.use(VueLazyload, {
   attempt: 1, // 尝试计数
   listenEvents: [ 'scroll', 'mousewheel', 'touchmove' ] // 你想要监听的事件
 }) 
+const originalPush = Router.prototype.push
+Router.prototype.push = function push (location, onResolve, onReject) {
+  if (onResolve || onReject) return originalPush.call(this, location, onResolve, onReject)
+  return originalPush.call(this, location).catch(err => err)
+}
 /* eslint-disable no-new */
 new Vue({
   el: '#app',

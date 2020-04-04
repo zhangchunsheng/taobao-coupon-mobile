@@ -1,6 +1,6 @@
 <template>
     <div v-if="data">
-        <detail-header :title="data.goods_title" :scrollY="scrollY"></detail-header>
+        <detail-header :title="data.title" :scrollY="scrollY"></detail-header>
         <fade>
             <parameter :itemProperties="itemProperties" :listShow="PropertiesTip" v-show="PropertiesTip" v-on:hide="hideProperties"></parameter>
         </fade>
@@ -15,62 +15,42 @@
         </fade>
         <div class="detail" ref="detail">
             <div class="wrapper">
-                <detail-swiper :swiperimgs="swiperImgs" :sightName="name"></detail-swiper>
+                <detail-swiper :swiperimgs="data.small_images.string" :sightName="name"></detail-swiper>
                 <div class="good-info">
-                    <h1 class="title"><span class="is-tianmao">{{data.is_tmall}}</span>{{data.goods_title}}</h1>
+                    <h1 class="title"><span class="is-tianmao">{{data.user_type}}</span>{{data.title}}</h1>
                     <div class="row">
-                        <span class="quanhou">券后价 ￥ <span class="strong">{{data.goods_price - data.coupon_price | round}} </span></span>
-                        <span class="goods-sales">已售: {{data.goods_sales}}</span>
+                        <span class="quanhou">券后价 ￥ <span class="strong">{{data.zk_final_price}} </span></span>
+                        <span class="goods-sales">已售: {{data.volume}}</span>
                     </div>
                     <div class="row">
-                        <span class="goods-price"> 原价{{data.goods_price}}</span>
-                        <span class="favorite" :class="{'favorited':favorited}" @click="favorite">{{favorited ? '已收藏':'收藏'}} <i class="icon-14"></i></span>
+                        <span class="goods-price"> 原价{{data.reserve_price}}</span>
+                        <!--<span class="favorite" :class="{'favorited':favorited}" @click="favorite">{{favorited ? '已收藏':'收藏'}} <i class="icon-14"></i></span>-->
                     </div>
                     <div class="quan-info" @click="buy" >
                         <div class="desc">
                             <div class="left">
                                 <div class="wrapper">
-                                    <p class="coupon_price"> <span class="strong">{{data.coupon_price | parseInt}}</span>元优惠券</p>
+                                    <p class="coupon_price"> <span class="strong">{{data.coupon_amount | parseInt}}</span>元优惠券</p>
                                     <p class="date">{{data.coupon_start_time |date}} ~ {{data.coupon_end_time | date}}</p>
                                 </div>
                             </div>
                             <div class="right"><span class="text">立即领券</span></div>
                         </div>
                     </div>
-                    <div class="goods-introduce">{{data.goods_introduce}}</div>
+                    <div class="goods-introduce">{{data.item_description}}</div>
                 </div>
                 <div class="split"></div>
-                <div class="item-properties" @click="showProperties">
+                <!--<div class="item-properties" @click="showProperties">
                     参数
                     <i class="icon-3 to-right"></i>
-                </div>
+                </div>-->
                 <div class="split"></div>
                 <nice-title :type="0">店铺信息</nice-title>
                 <div class="shop-content">
                     <div class="shop-wrapper">
-                        <div class="shop-icon">
-                            <img class="img" :src="seller.shopIcon" alt="LOGO">
-                        </div>
                         <div class="shop-title">
                             <div class="shop-name">
-                                    {{seller.shopName}}
-                            </div>
-                            <div class="shop-type">
-                                    <img class="img" :src="seller.creditLevelIcon" >
-                            </div>
-                        </div>
-                        <div class="shop-desc" v-if="seller.evaluates">
-                            <div class="box border-right">
-                                {{seller.evaluates[0].title}} {{seller.evaluates[0].score}}
-                                <span class="mini-text" :style="{'color':seller.evaluates[0].levelBackgroundColor,'background':seller.evaluates[0].levelTextColor}">{{seller.evaluates[0].levelText}}</span>
-                            </div>
-                            <div class="box border-right">
-                                {{seller.evaluates[1].title}} {{seller.evaluates[1].score}}
-                                <span class="mini-text" :style="{'color':seller.evaluates[1].levelBackgroundColor,'background':seller.evaluates[1].levelTextColor}">{{seller.evaluates[1].levelText}}</span>
-                            </div>
-                            <div class="box">
-                                {{seller.evaluates[2].title}} {{seller.evaluates[2].score}}
-                                <span class="mini-text" :style="{'color':seller.evaluates[2].levelBackgroundColor,'background':seller.evaluates[2].levelTextColor}">{{seller.evaluates[2].levelText}}</span>
+                                    {{data.shop_title}}
                             </div>
                         </div>
                     </div>
@@ -79,7 +59,7 @@
                 <nice-title :type="0">宝贝详情</nice-title>
                 <div class="detail-img">
                     <div class="detail-img-wrapper" >
-                        <img class="img" v-for="(item,index) of detailImg" :key="index" :src="item" >
+                        <img class="img" v-for="(item,index) of data.small_images.string" :key="index" :src="item" >
                     </div>
                 </div>
                 
@@ -103,11 +83,7 @@ export default {
     data () {
         return {
             data: {},
-            details: {},
             name: '牙膏',
-            swiperImgs: [],
-            detailImg: [],
-            seller: {},
             TpwdTip: '',
             favorited: false,
             itemProperties: [],
@@ -119,8 +95,6 @@ export default {
     },
     created () {
         this.data = this.$route.params
-        this.getDetail()
-        this.getDetailImg()
         this.selectFavorite()
     },
     mounted () {
@@ -155,52 +129,9 @@ export default {
                 this.scroll.refresh()
             }
         },
-        getDetail: function () {
-            axios.get('https://h5api.m.taobao.com/h5/mtop.taobao.detail.getdetail/6.0/?data=%7B%22itemNumId%22%3A%22' + this.data.goods_id + '%22%7D')
-            .then(this.handlegetDetailSucc)  
-        },
-        handlegetDetailSucc: function (res) {
-            // console.log(res.data)
-            let data = res.data
-            if (data.ret[0] === 'SUCCESS::调用成功') {
-                this.details = data.data
-                this.swiperImgs = data.data.item.images
-                this.seller = data.data.seller
-                let groupProps = data.data.props.groupProps[0]['基本信息']
-                let arr = []
-                for (let i = 0; i < groupProps.length; i++) {
-                    let obj = {}
-                    for (let k in groupProps[i]) {
-                        obj.name = k
-                        obj.value = groupProps[i][k]
-                        arr.push(obj)
-                    }
-                }
-                this.itemProperties = arr
-                // console.log(this.itemProperties)
-            }
-        },
-        getDetailImg: function () { // 旧接口  https://hws.m.taobao.com/cache/mtop.wdetail.getItemDescx/4.1/?data={%22item_num_id%22:%22' + this.data.goods_id + '%22}&type=json&dataType=json
-            axios.get('http://h5api.m.taobao.com/h5/mtop.taobao.detail.getdesc/6.0/?data={%22id%22:%22' + this.data.goods_id + '%22}')
-            .then(this.handlegetDetailImgfSucc)  
-        },
-        handlegetDetailImgfSucc: function (res) {
-            let data = res.data
-            // console.log(data)
-            if (data.ret[0] === 'SUCCESS::调用成功') {
-                // this.detailImg = data.data.images
-                // console.log(data.data.pcDescContent)
-                let str = data.data.pcDescContent
-                let arr = []
-                str.replace(/<img [^>]*src=['"]([^'"]+)[^>]*>/gi, function (match, capture) {
-                    arr.push('http:' + capture)
-                })
-                this.detailImg = arr
-            }
-        },
         buy: function () {
             if (!this.TpwdTip) { // 二次点击直接显示不请求
-                axios.get('http://coupon-collect.luomor.com/coupon/getTPwd?item_id=' + this.data.goods_id + '&title=' + this.data.goods_title)
+                axios.get('http://coupon-collect.luomor.com/coupon/getTPwd?item_id=' + this.data.item_id + '&title=' + this.data.title)
                 .then(this.handleTpwdSucc) 
             } else {
                 this.tpwdMask = true
@@ -214,18 +145,18 @@ export default {
         },
         favorite: function () { // 收藏
             if (!this.favorited) {
-                saveToLocal(this.data.goods_id, 'favorite', this.data)
+                saveToLocal(this.data.item_id, 'favorite', this.data)
             } else {
                 this.deleteFavorate()
             }
             this.selectFavorite()
         },
         selectFavorite: function () { // 查询收藏
-            let fav = loadFromLocal(this.data.goods_id, 'favorite', '')
+            let fav = loadFromLocal(this.data.item_id, 'favorite', '')
             fav ? (this.favorited = true) : (this.favorited = false)
         },
         deleteFavorate: function () { // 取消该商品的收藏
-            deleteToLocal(this.data.goods_id, 'favorite', '')
+            deleteToLocal(this.data.item_id, 'favorite', '')
         },
         showProperties: function () {
             this.PropertiesTip = true

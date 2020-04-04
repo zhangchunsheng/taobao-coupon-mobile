@@ -50,8 +50,7 @@ export default {
             if (!event._constructed) {
                 return
             }
-            // console.log(data.seller_id)
-            this.$router.push({name: 'Detail', params: data})
+            this.$router.push({name: 'Detail', params: data}).catch(err => { console.log(err) })
         }
     }
 }
