@@ -79,7 +79,7 @@ export default {
     },
     methods: {
         getInfo: function () {
-            axios.get(process.env.API_ROOT + '/coupon/getIndexData')
+            axios.get(process.env.API_ROOT + '/coupon/getClassifyData')
             .then(this.handleGitInfoSucc)  
         },
         handleGitInfoSucc: function (res) {

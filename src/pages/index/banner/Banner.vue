@@ -2,7 +2,7 @@
     <div class="banner border-topbottom">
         <div class="banner-title">
             <h1 class="title">大家都在领</h1>
-            <span class="desc">手慢无</span>
+            <span class="desc">帮你省钱</span>
         </div>
         <div class="banner-content" ref="pic-wrapper">
             <div class="wrapper" ref="banner-wrapper">

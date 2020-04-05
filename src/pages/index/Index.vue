@@ -76,7 +76,7 @@ export default {
         }
     },
     getInfo: function () {
-        axios.get(process.env.API_ROOT + '/coupon/getIndexData')
+        axios.get(process.env.API_ROOT + '/coupon/getIndexmData')
         .then(this.handleGitInfoSucc)
     },
     handleGitInfoSucc: function (res) {
@@ -85,13 +85,6 @@ export default {
         if (data.code === 200) {
           this.swiperList = data.result.swiper
           this.iconlist = data.result.channel
-          let materials = data.result.materials
-          let materialsobj = {}
-          for (let i in materials) {
-            materialsobj[materials[i].group_id] = materials[i]
-          }
-          data.result.materialsobj = materialsobj
-          window.lm_c_data = data.result
         }
         
         // DOM 更新了 操作dom时一定要在$nextTick里
