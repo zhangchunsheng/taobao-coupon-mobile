@@ -24,7 +24,7 @@ export default {
     name: 'best',
     data () {
         return {
-            groupId: 5,
+            groupId: 4,
             adzoneId: 110172200064,
             materialId: 3764,
             goodsList: [],

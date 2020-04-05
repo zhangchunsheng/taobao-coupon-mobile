@@ -10,7 +10,7 @@
             <router-link to="/best" tag="div" class="tabbar-item">
                 <div class="wrapper">
                     <i class="iconfont icon-uniE902"></i>
-                    优质商品
+                    精品商品
                 </div>
             </router-link>
             <router-link to="/moch" tag="div" class="tabbar-item">
