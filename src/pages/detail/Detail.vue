@@ -134,7 +134,11 @@ export default {
             var isWeixin = ua.indexOf('micromessenger') !== -1
             if (!isWeixin) {
                 // window.location.href = this.data.coupon_share_url
-                window.open(this.data.coupon_share_url)
+                if (/(iPhone|iPad|iPod|iOS|Android)/i.test(navigator.userAgent)) { // 移动端
+                    window.open(this.data.coupon_share_url.replace('https', 'taobao'))
+                } else {
+                    window.open(this.data.coupon_share_url)
+                }
             } else {
                 if (!this.TpwdTip) { // 二次点击直接显示不请求
                     axios.get('https://coupon-collect.luomor.com/coupon/getTPwd?click_url=' + this.data.click_url + '&coupon_share_url=' + this.data.coupon_share_url + '&title=' + this.data.title)
