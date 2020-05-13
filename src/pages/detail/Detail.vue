@@ -135,7 +135,7 @@ export default {
             if (!isWeixin) {
                 // window.location.href = this.data.coupon_share_url
                 if (/(iPhone|iPad|iPod|iOS|Android)/i.test(navigator.userAgent)) { // 移动端
-                    window.open(this.data.coupon_share_url.replace('https', 'taobao'))
+                    window.location.href = this.data.coupon_share_url.replace('https', 'taobao')
                 } else {
                     window.open(this.data.coupon_share_url)
                 }
