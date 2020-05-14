@@ -46,3 +46,15 @@ internal/modules/cjs/loader.js:628
     ^
 
 Error: Cannot find module 'webpack-cli/bin/config-yargs'
+
+beforeCreate
+created
+beforeMount
+mounted
+beforeUpdate
+updated
+activated
+deactivated
+beforeDestroy
+destroyed
+errorCaptured

@@ -53,6 +53,10 @@ export default {
             }
         })
     },
+    activated () {
+        console.log('activated')
+        this.refresh()
+    },
     components: {
         Goods,
         Sort,
@@ -77,6 +81,11 @@ export default {
             } else {
                 this.scroll.refresh()
             }
+        },
+        refresh: function () {
+          if (this.scroll) {
+            this.scroll.refresh()
+          }
         },
         getSearchList: function (adzoneId, materialId) {
             axios.get(process.env.API_ROOT + '/taobao/getOptimusMaterial?adzone_id=' + adzoneId + '&material_id=' + materialId + '&page_no=' + this.pageNo)

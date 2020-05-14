@@ -43,6 +43,13 @@ export default {
     this.getInfo()
     this.getTop100()
   },
+  updated () {
+    console.log('updated')
+  },
+  activated () {
+    console.log('activated')
+    this.refresh()
+  },
   components: {
     NiceTitle,
     Swiper,
@@ -74,6 +81,11 @@ export default {
         } else {
             this.scroll.refresh()
         }
+    },
+    refresh: function () {
+      if (this.scroll) {
+        this.scroll.refresh()
+      }
     },
     getInfo: function () {
         axios.get(process.env.API_ROOT + '/coupon/getIndexmData')
