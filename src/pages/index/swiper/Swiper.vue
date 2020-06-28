@@ -28,6 +28,8 @@ export default {
           },
           loop: true,
           autoplay: 3000,
+          observer: true, // 修改swiper自己或子元素时，自动初始化swiper 
+          observeParents: true, // 修改swiper的父元素时，自动初始化swiper 
           preventClicksPropagation: true // 阻止click冒泡。拖动Swiper时阻止click事件。
         }
       }
