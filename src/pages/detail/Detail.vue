@@ -95,7 +95,11 @@ export default {
     },
     created () {
         this.data = this.$route.params
-        this.selectFavorite()
+        if (this.data.hasOwnProperty('item_id')) {
+            this.selectFavorite()
+        } else {
+            this.$router.push({name: 'Index'})
+        }
     },
     mounted () {
         // console.log(this.data)
