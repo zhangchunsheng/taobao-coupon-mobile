@@ -17,8 +17,7 @@ export default {
     },
     methods: {
         back: function () {
-            alert(history.length)
-            if (history.length > 0) {
+            if (history.length > 1) {
                 this.$router.go(-1)
             } else {
                 this.$router.push({name: 'Index'})
