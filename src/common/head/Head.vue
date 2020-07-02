@@ -17,6 +17,7 @@ export default {
     },
     methods: {
         back: function () {
+            alert(history.length)
             if (history.length > 0) {
                 this.$router.go(-1)
             } else {
