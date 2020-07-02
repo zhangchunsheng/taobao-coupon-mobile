@@ -17,10 +17,11 @@ export default {
     },
     methods: {
         back: function () {
-            if (history.length > 1) {
-                this.$router.go(-1)
-            } else {
+            console.log(this.$route.query)
+            if (this.$route.query.hasOwnProperty('source') && this.$route.query.source === 'robot') {
                 this.$router.push({name: 'Index'})
+            } else {
+                this.$router.go(-1)
             }
         }
     }
