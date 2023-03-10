@@ -144,12 +144,13 @@ export default {
                     window.open(this.data.coupon_share_url)
                 }
             } else {
-                if (!this.TpwdTip) { // 二次点击直接显示不请求
+                window.location.href = this.data.coupon_share_url.replace('https', 'taobao')
+                /*if (!this.TpwdTip) { // 二次点击直接显示不请求
                     axios.get('https://coupon-collect.luomor.com/coupon/getTPwd?click_url=' + this.data.click_url + '&coupon_share_url=' + this.data.coupon_share_url + '&title=' + this.data.title)
                     .then(this.handleTpwdSucc) 
                 } else {
                     this.tpwdMask = true
-                }
+                }*/
             }
         },
         handleTpwdSucc: function (res) {
