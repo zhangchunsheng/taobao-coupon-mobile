@@ -1,6 +1,9 @@
 [taobao-coupon-mobile_1.0.0.1 2020-07-02 张春生]
 1.新功能:优化返回功能
 
+[taobao-coupon-mobile_1.0.0.1 2023-03-10 张春生]
+1.新功能:update background
+
 --备注分类
 1、新功能：
 2、Bug:
