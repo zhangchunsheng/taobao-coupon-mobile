@@ -37,6 +37,17 @@
                             <div class="right"><span class="text">立即领券</span></div>
                         </div>
                     </div>
+                    <div class="quan-info" @click="getCoupon1" >
+                        <div class="desc">
+                            <div class="left">
+                                <div class="wrapper">
+                                    <p class="coupon_price"> <span class="strong">{{data.coupon_amount | parseInt}}</span>元优惠券</p>
+                                    <p class="date">{{data.coupon_start_time |date}} ~ {{data.coupon_end_time | date}}</p>
+                                </div>
+                            </div>
+                            <div class="right"><span class="text">复制文字</span></div>
+                        </div>
+                    </div>
                     <div class="goods-introduce">{{data.item_description}}</div>
                 </div>
                 <div class="split"></div>
@@ -151,6 +162,14 @@ export default {
                 } else {
                     this.tpwdMask = true
                 }*/
+            }
+        },
+        getCoupon1: function () {
+            if (!this.TpwdTip) { // 二次点击直接显示不请求
+                axios.get('https://coupon-collect.luomor.com/coupon/getTPwd?click_url=' + this.data.click_url + '&coupon_share_url=' + this.data.coupon_share_url + '&title=' + this.data.title)
+                .then(this.handleTpwdSucc) 
+            } else {
+                this.tpwdMask = true
             }
         },
         handleTpwdSucc: function (res) {
