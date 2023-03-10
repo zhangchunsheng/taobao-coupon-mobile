@@ -45,7 +45,7 @@
                                     <p class="date">{{data.coupon_start_time |date}} ~ {{data.coupon_end_time | date}}</p>
                                 </div>
                             </div>
-                            <div class="right"><span class="text">复制文字</span></div>
+                            <div class="right"><span class="text">复文字领</span></div>
                         </div>
                     </div>
                     <div class="goods-introduce">{{data.item_description}}</div>
