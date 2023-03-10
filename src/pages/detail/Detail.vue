@@ -37,7 +37,7 @@
                             <div class="right"><span class="text">立即领券</span></div>
                         </div>
                     </div>
-                    <div class="quan-info" @click="getCoupon1" >
+                    <div style="margin-top: 6px" class="quan-info" @click="getCoupon1" >
                         <div class="desc">
                             <div class="left">
                                 <div class="wrapper">
