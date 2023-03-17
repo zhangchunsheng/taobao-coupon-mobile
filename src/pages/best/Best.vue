@@ -1,9 +1,9 @@
 <template>
     <div>
-        <div class="content">
-            <tab :tabs="tabList"></tab>
+        <tab :tabs="tabList"></tab>
+        <div class="content" ref="content">
             <!--<sort></sort>-->
-            <div class="scroll" ref="scroll">
+            <div>
                 <goods :goodslist="goodsList"></goods>
             </div>
             <!-- <nice-title :type="1">Best</nice-title> -->
@@ -111,7 +111,7 @@ export default {
             if (!this.scroll) {
                     let that = this
                     this.$nextTick(() => {
-                        this.scroll = new BScroll(this.$refs.scroll, {
+                        this.scroll = new BScroll(this.$refs.content, {
                             click: true,
                             observeDOM: true,
                             pullUpLoad: {
@@ -149,22 +149,4 @@ export default {
             text-align: center
             font-size: .2rem
             color: #888
-    .page
-        .scroll
-            position: absolute
-            width: 100%
-            top: 0.6 rem
-            left: 0
-            bottom: 1rem
-            z-index: -1
-        .bottom-tip
-            height: .8rem
-            line-height: .8rem
-            text-align: center
-            font-size: .2rem
-            color: #888 
-            position: absolute
-            bottom: 1rem
-            width: 100%
-            z-index: -2
 </style>
