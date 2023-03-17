@@ -107,6 +107,7 @@ export default {
         },
         _initScroll () {
             if (!this.scroll) {
+                    let that = this
                     this.$nextTick(() => {
                         this.scroll = new BScroll(this.$refs.scroll, {
                             click: true,
@@ -117,8 +118,8 @@ export default {
                         })
                         this.scroll.on('pullingUp', () => {
                             console.log('触底')
-                            this.pageNo++
-                            !this.noData && this.getGoods()
+                            that.pageNo++
+                            !that.noData && that.getGoods()
                         })
                     })
             } else {

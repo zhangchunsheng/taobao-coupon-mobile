@@ -63,6 +63,7 @@ export default {
     methods: {
         _initScroll () {
             if (!this.scroll) {
+                    let that = this
                     this.$nextTick(() => {
                         this.scroll = new BScroll(this.$refs['wrapper'], {
                             click: true,
@@ -73,8 +74,8 @@ export default {
                         })
                         this.scroll.on('pullingUp', () => {
                             console.log('触底')
-                            this.pageNo++
-                            !this.noData && this.getSearchList(this.key)
+                            that.pageNo++
+                            !that.noData && that.getSearchList(that.key)
                         })
                     })
             } else {
