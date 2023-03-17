@@ -13,6 +13,8 @@
 
 <script type="text/ecmascript-6">
 import BScroll from '@better-scroll/core'
+import ObserveDOM from '@better-scroll/observe-dom'
+BScroll.use(ObserveDOM)
 export default {
     name: 'Parameter',
     props: {
@@ -28,7 +30,8 @@ export default {
             if (!this.scroll) {
                 this.$nextTick(() => {
                 this.scroll = new BScroll(this.$refs.parameter, {
-                    click: true
+                    click: true,
+                    observeDOM: true
                     })
                 })
             } else {
@@ -41,7 +44,8 @@ export default {
             if (!this.scroll) {
                     this.$nextTick(() => {
                         this.scroll = new BScroll(this.$refs.parameter, {
-                            click: true
+                            click: true,
+                            observeDOM: true
                         })
                     })
             } else {

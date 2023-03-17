@@ -86,9 +86,11 @@ import DetailSwiper from './swiper/Swiper'
 import Parameter from './parameter/Parameter'
 import TpwdPop from './tpwdpop/TpwdPop'
 import BScroll from '@better-scroll/core'
+import ObserveDOM from '@better-scroll/observe-dom'
 import NiceTitle from 'common/nicetitle/NiceTitle'
 import Fade from 'common/fade/FadeAnimation'
 import {saveToLocal, loadFromLocal, deleteToLocal} from '@/assets/js/Store'
+BScroll.use(ObserveDOM)
 export default {
     name: 'Detail',
     data () {
@@ -133,7 +135,8 @@ export default {
                     this.$nextTick(() => {
                         this.scroll = new BScroll(this.$refs.detail, {
                             click: true,
-                            probeType: 3
+                            probeType: 3,
+                            observeDOM: true
                         })
                         this.scroll.on('scroll', (pos) => {
                             this.scrollY = Math.abs(Math.round(pos.y))

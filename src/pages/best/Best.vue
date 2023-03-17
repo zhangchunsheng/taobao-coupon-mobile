@@ -15,11 +15,15 @@
 import TabBar from '../tabBar/TabBar'
 import axios from 'axios'
 import BScroll from '@better-scroll/core'
+import ObserveDOM from '@better-scroll/observe-dom'
+import Pullup from '@better-scroll/pull-up'
 import NiceTitle from 'common/nicetitle/NiceTitle'
 import Goods from 'common/goods/Goods'
 import Sort from 'common/sort/Sort'
 import Tab from 'common/tab/Tab'
 import Bus from '@/assets/js/eventBus'
+BScroll.use(ObserveDOM)
+BScroll.use(Pullup)
 export default {
     name: 'best',
     data () {
@@ -106,9 +110,10 @@ export default {
                     this.$nextTick(() => {
                         this.scroll = new BScroll(this.$refs.scroll, {
                             click: true,
+                            observeDOM: true,
                             pullUpLoad: {
-                                        threshold: 50
-                                    }
+                              threshold: 50
+                            }
                         })
                         this.scroll.on('pullingUp', () => {
                             console.log('触底')

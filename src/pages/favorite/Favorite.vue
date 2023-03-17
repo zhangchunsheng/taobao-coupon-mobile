@@ -29,8 +29,10 @@
 
 <script type="text/ecmascript-6">
 import BScroll from '@better-scroll/core'
+import ObserveDOM from '@better-scroll/observe-dom'
 import FavoriteHead from 'common/head/Head'
 import {loadFromLocal, deleteToLocal} from '@/assets/js/Store'
+BScroll.use(ObserveDOM)
 export default {
     name: 'Favorite',
     data () {
@@ -65,7 +67,8 @@ export default {
             if (!this.scroll) {
                     this.$nextTick(() => {
                         this.scroll = new BScroll(this.$refs.favorite, {
-                            click: true
+                            click: true,
+                            observeDOM: true
                         })
                     })
             } else {

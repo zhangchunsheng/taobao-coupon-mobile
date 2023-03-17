@@ -31,6 +31,8 @@
 
 <script type="text/ecmascript-6">
 import BScroll from '@better-scroll/core'
+import ObserveDOM from '@better-scroll/observe-dom'
+BScroll.use(ObserveDOM)
 export default {
     name: 'Banner',
     props: {
@@ -71,7 +73,8 @@ export default {
                             this.scrollPic = new BScroll(this.$refs['pic-wrapper'], {
                                 click: true,
                                 scrollX: true,
-                                eventPassthrough: 'vertical'
+                                eventPassthrough: 'vertical',
+                                observeDOM: true
                             })
                         })
                 } else {

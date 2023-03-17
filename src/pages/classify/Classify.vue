@@ -31,8 +31,10 @@
 <script type="text/ecmascript-6">
 import TabBar from '../tabBar/TabBar'
 import BScroll from '@better-scroll/core'
+import ObserveDOM from '@better-scroll/observe-dom'
 import axios from 'axios'
 // import Bus from '@/assets/js/eventBus'
+BScroll.use(ObserveDOM)
 export default {
     name: 'Classify',
     props: {
@@ -103,11 +105,13 @@ export default {
         },
         _initScroll: function () {
             this.menuScroll = new BScroll(this.$refs['menu-wrapper'], {
-                click: true
+                click: true,
+                observeDOM: true
             }) 
             this.MaterialsScroll = new BScroll(this.$refs['materials-wrapper'], {
                 probeType: 3,
-                click: true
+                click: true,
+                observeDOM: true
             })
             this.MaterialsScroll.on('scroll', (pos) => {
                 this.scrollY = Math.abs(Math.round(pos.y)) + 200

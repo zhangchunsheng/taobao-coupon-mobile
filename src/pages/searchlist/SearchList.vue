@@ -16,8 +16,12 @@ import axios from 'axios'
 import CatHead from 'common/head/Head'
 import Goods from 'common/goods/Goods'
 import BScroll from '@better-scroll/core'
+import ObserveDOM from '@better-scroll/observe-dom'
+import Pullup from '@better-scroll/pull-up'
 import Sort from 'common/sort/Sort'
 import Bus from '@/assets/js/eventBus'
+BScroll.use(ObserveDOM)
+BScroll.use(Pullup)
 export default {
     name: 'SearchList',
     data () {
@@ -62,9 +66,10 @@ export default {
                     this.$nextTick(() => {
                         this.scroll = new BScroll(this.$refs['wrapper'], {
                             click: true,
+                            observeDOM: true,
                             pullUpLoad: {
-                                        threshold: 50
-                                    }
+                                threshold: 50
+                            }
                         })
                         this.scroll.on('pullingUp', () => {
                             console.log('触底')

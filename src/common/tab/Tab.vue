@@ -12,7 +12,9 @@
 
 <script type="text/ecmascript-6">
 import BScroll from '@better-scroll/core'
+import ObserveDOM from '@better-scroll/observe-dom'
 import Bus from '@/assets/js/eventBus'
+BScroll.use(ObserveDOM)
 export default {
     name: '',
     props: {
@@ -47,6 +49,7 @@ export default {
                         this.scrollTab = new BScroll(this.$refs['menu-wrapper'], {
                             click: true,
                             scrollX: true,
+                            observeDOM: true,
                             eventPassthrough: 'vertical'
                         })
                 } else {
