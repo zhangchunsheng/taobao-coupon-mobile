@@ -23,11 +23,12 @@ import NiceTitle from 'common/nicetitle/NiceTitle'
 import Swiper from './swiper/Swiper'
 import axios from 'axios'
 import BScroll from 'better-scroll'
-import Wheel from '@better-scroll/mouse-wheel'
+import MouseWheel from '@better-scroll/mouse-wheel'
 import IndexHeader from './header/IndexHeader'
 import Icons from './icons/Icons'
 import Goods from 'common/goods/Goods'
 import Banner from './banner/Banner'
+BScroll.use(MouseWheel)
 export default {
   name: 'Index',
   data () {
