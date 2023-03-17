@@ -42,7 +42,7 @@ export default {
      },
      swiper () {
         return this.$refs.mySwiper.swiper
-    }
+     }
    },
    methods: {
         selecteCat: function (adzoneId, materialId, channelName) {
