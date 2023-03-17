@@ -28,7 +28,7 @@
 </template>
 
 <script type="text/ecmascript-6">
-import BScroll from 'better-scroll'
+import BScroll from '@better-scroll/core'
 import FavoriteHead from 'common/head/Head'
 import {loadFromLocal, deleteToLocal} from '@/assets/js/Store'
 export default {

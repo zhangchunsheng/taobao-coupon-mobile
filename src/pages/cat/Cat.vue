@@ -15,7 +15,7 @@
 import axios from 'axios'
 import Goods from 'common/goods/Goods'
 import CatHead from 'common/head/Head'
-import BScroll from 'better-scroll'
+import BScroll from '@better-scroll/core'
 import Sort from 'common/sort/Sort'
 import Bus from '@/assets/js/eventBus'
 export default {

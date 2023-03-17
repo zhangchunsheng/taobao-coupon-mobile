@@ -14,7 +14,7 @@
 <script type="text/ecmascript-6">
 import TabBar from '../tabBar/TabBar'
 import axios from 'axios'
-import BScroll from 'better-scroll'
+import BScroll from '@better-scroll/core'
 import NiceTitle from 'common/nicetitle/NiceTitle'
 import Goods from 'common/goods/Goods'
 import Sort from 'common/sort/Sort'

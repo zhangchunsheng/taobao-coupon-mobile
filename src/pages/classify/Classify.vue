@@ -30,7 +30,7 @@
 
 <script type="text/ecmascript-6">
 import TabBar from '../tabBar/TabBar'
-import BScroll from 'better-scroll'
+import BScroll from '@better-scroll/core'
 import axios from 'axios'
 // import Bus from '@/assets/js/eventBus'
 export default {

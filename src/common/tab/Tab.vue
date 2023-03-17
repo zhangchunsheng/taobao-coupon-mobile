@@ -11,7 +11,7 @@
 </template>
 
 <script type="text/ecmascript-6">
-import BScroll from 'better-scroll'
+import BScroll from '@better-scroll/core'
 import Bus from '@/assets/js/eventBus'
 export default {
     name: '',

@@ -30,7 +30,7 @@
 </template>
 
 <script type="text/ecmascript-6">
-import BScroll from 'better-scroll'
+import BScroll from '@better-scroll/core'
 export default {
     name: 'Banner',
     props: {
