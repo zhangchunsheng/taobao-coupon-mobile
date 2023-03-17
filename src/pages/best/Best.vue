@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div class="page">
+        <div class="content">
             <tab :tabs="tabList"></tab>
             <!--<sort></sort>-->
             <div class="scroll" ref="scroll">
@@ -11,7 +11,6 @@
         </div>
         <tab-bar></tab-bar>
     </div>
-    
 </template>
 
 <script type="text/ecmascript-6">
@@ -137,6 +136,19 @@ export default {
 </script>
 
 <style scoped lang="stylus">
+    .content
+        position: absolute
+        width: 100%
+        top: .9rem
+        bottom: .2rem
+        left: 0
+        overflow: hidden
+        .bottom-tip
+            height: .8rem
+            line-height: .8rem
+            text-align: center
+            font-size: .2rem
+            color: #888
     .page
         .scroll
             position: absolute
