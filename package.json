@@ -11,6 +11,7 @@
     "build": "node build/build.js"
   },
   "dependencies": {
+    "@better-scroll/mouse-wheel": "^2.5.0",
     "axios": "^0.18.0",
     "better-scroll": "^1.12.6",
     "clipboard": "^2.0.1",
