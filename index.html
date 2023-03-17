@@ -42,9 +42,17 @@
       console.log(window.location);
       if(window.screen.width > window.screen.height) {
         // not in iframe
-        if(window.frames.length != parent.frames.length) {
-          console.log("in frame");
-          // window.location.href = "https://tb.luomor.com/";
+        //方式一 
+        if (self.frameElement && self.frameElement.tagName == "IFRAME") { 
+          alert('在iframe中'); 
+        } 
+        //方式二 
+        if (window.frames.length != parent.frames.length) { 
+          alert('在iframe中'); 
+        } 
+        //方式三 
+        if (self != top) { 
+        alert('在iframe中'); 
         }
       }
     </script>
