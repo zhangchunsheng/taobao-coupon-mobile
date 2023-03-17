@@ -1,14 +1,17 @@
 <template>
-    <div class="page">
-        <tab :tabs="tabList"></tab>
-        <!--<sort></sort>-->
-        <div class="scroll" ref="scroll">
-            <goods :goodslist="goodsList"></goods>
+    <div>
+        <div class="page">
+            <tab :tabs="tabList"></tab>
+            <!--<sort></sort>-->
+            <div class="scroll" ref="scroll">
+                <goods :goodslist="goodsList"></goods>
+            </div>
+            <!-- <nice-title :type="1">Best</nice-title> -->
+            <div class="bottom-tip" v-show="noData">暂无数据</div>
         </div>
-        <!-- <nice-title :type="1">Best</nice-title> -->
-        <div class="bottom-tip" v-show="noData">暂无数据</div>
         <tab-bar></tab-bar>
     </div>
+    
 </template>
 
 <script type="text/ecmascript-6">
