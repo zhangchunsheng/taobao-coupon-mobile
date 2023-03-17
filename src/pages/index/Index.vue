@@ -23,6 +23,7 @@ import NiceTitle from 'common/nicetitle/NiceTitle'
 import Swiper from './swiper/Swiper'
 import axios from 'axios'
 import BScroll from 'better-scroll'
+import Wheel from '@better-scroll/mouse-wheel'
 import IndexHeader from './header/IndexHeader'
 import Icons from './icons/Icons'
 import Goods from 'common/goods/Goods'
@@ -75,7 +76,12 @@ export default {
         if (!this.scroll) {
                 this.$nextTick(() => {
                     this.scroll = new BScroll(this.$refs.content, {
-                        click: true
+                        click: true,
+                        mouseWheel: {
+                          speed: 20,
+                          invert: false,
+                          easeTime: 300
+                        }
                     })
                 })
         } else {
