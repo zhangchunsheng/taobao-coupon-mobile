@@ -23,6 +23,7 @@ export default {
    data () {
        return {
         swiperOption: {
+          mousewheel: true,
           pagination: {
             el: '.swiper-pagination'
           },
