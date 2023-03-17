@@ -24,11 +24,13 @@ import Swiper from './swiper/Swiper'
 import axios from 'axios'
 import BScroll from '@better-scroll/core'
 import MouseWheel from '@better-scroll/mouse-wheel'
+import ObserveDOM from '@better-scroll/observe-dom'
 import IndexHeader from './header/IndexHeader'
 import Icons from './icons/Icons'
 import Goods from 'common/goods/Goods'
 import Banner from './banner/Banner'
 BScroll.use(MouseWheel)
+BScroll.use(ObserveDOM)
 export default {
   name: 'Index',
   data () {
@@ -78,6 +80,8 @@ export default {
                 this.$nextTick(() => {
                     this.scroll = new BScroll(this.$refs.content, {
                         click: true,
+                        //probeType: 3,
+                        observeDOM: true,
                         mouseWheel: {
                           speed: 20,
                           invert: false,
