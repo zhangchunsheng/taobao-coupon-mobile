@@ -17,6 +17,7 @@
 import TabBar from '../tabBar/TabBar'
 import axios from 'axios'
 import BScroll from '@better-scroll/core'
+import MouseWheel from '@better-scroll/mouse-wheel'
 import ObserveDOM from '@better-scroll/observe-dom'
 import Pullup from '@better-scroll/pull-up'
 import NiceTitle from 'common/nicetitle/NiceTitle'
@@ -26,6 +27,7 @@ import Tab from 'common/tab/Tab'
 import Bus from '@/assets/js/eventBus'
 BScroll.use(ObserveDOM)
 BScroll.use(Pullup)
+BScroll.use(MouseWheel)
 export default {
     name: 'moch',
     data () {
@@ -116,6 +118,11 @@ export default {
                             observeDOM: true,
                             pullUpLoad: {
                                 threshold: 50
+                            },
+                            mouseWheel: {
+                                speed: 20,
+                                invert: false,
+                                easeTime: 300
                             }
                         })
                         this.scroll.on('pullingUp', () => {
