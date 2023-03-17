@@ -94,7 +94,7 @@ export default {
           }
         },
         getSearchList: function (adzoneId, materialId) {
-            axios.get(process.env.API_ROOT + '/taobao/getOptimusMaterial?adzone_id=' + adzoneId + '&material_id=' + materialId + '&page_no=' + this.pageNo)
+            axios.get(process.env.API_ROOT + '/taobao/getOptimusMaterial?adzone_id=' + adzoneId + '&material_id=' + materialId + '&page_no=' + this.pageNo + '&page_size=' + this.pageSize)
             .then(this.handlegetSearchListSucc)  
         },
         handlegetSearchListSucc: function (res) {
