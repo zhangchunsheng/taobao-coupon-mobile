@@ -38,12 +38,13 @@
       // window.screen.availWidth
       console.log(window.screen.width);
       console.log(window.screen.availWidth);
-      console.log(window.parent.frames);
+      console.log(window.parent);
+      console.log(window.location);
       if(window.screen.width > window.screen.height) {
         // not in iframe
         if(window.length == 0) {
           console.log(window.length);
-          window.location.href = "https://tb.luomor.com/";
+          // window.location.href = "https://tb.luomor.com/";
         }
       }
     </script>
