@@ -32,9 +32,11 @@
 import TabBar from '../tabBar/TabBar'
 import BScroll from '@better-scroll/core'
 import ObserveDOM from '@better-scroll/observe-dom'
+import MouseWheel from '@better-scroll/mouse-wheel'
 import axios from 'axios'
 // import Bus from '@/assets/js/eventBus'
 BScroll.use(ObserveDOM)
+BScroll.use(MouseWheel)
 export default {
     name: 'Classify',
     props: {
@@ -106,12 +108,22 @@ export default {
         _initScroll: function () {
             this.menuScroll = new BScroll(this.$refs['menu-wrapper'], {
                 click: true,
-                observeDOM: true
+                observeDOM: true,
+                mouseWheel: {
+                    speed: 20,
+                    invert: false,
+                    easeTime: 300
+                }
             }) 
             this.MaterialsScroll = new BScroll(this.$refs['materials-wrapper'], {
                 probeType: 3,
                 click: true,
-                observeDOM: true
+                observeDOM: true,
+                mouseWheel: {
+                    speed: 20,
+                    invert: false,
+                    easeTime: 300
+                }
             })
             this.MaterialsScroll.on('scroll', (pos) => {
                 this.scrollY = Math.abs(Math.round(pos.y)) + 200
