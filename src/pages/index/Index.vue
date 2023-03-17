@@ -80,7 +80,7 @@ export default {
                 this.$nextTick(() => {
                     this.scroll = new BScroll(this.$refs.content, {
                         click: true,
-                        //probeType: 3,
+                        // probeType: 3,
                         observeDOM: true,
                         mouseWheel: {
                           speed: 20,

@@ -159,12 +159,12 @@ export default {
                 }
             } else {
                 window.open(this.data.coupon_share_url)
-                /*if (!this.TpwdTip) { // 二次点击直接显示不请求
+                /* if (!this.TpwdTip) { // 二次点击直接显示不请求
                     axios.get('https://coupon-collect.luomor.com/coupon/getTPwd?click_url=' + this.data.click_url + '&coupon_share_url=' + this.data.coupon_share_url + '&title=' + this.data.title)
                     .then(this.handleTpwdSucc) 
                 } else {
                     this.tpwdMask = true
-                }*/
+                } */
             }
         },
         getCoupon1: function () {
