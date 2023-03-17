@@ -6,8 +6,8 @@
             <goods :goodslist="goodsList"></goods>
         </div>
         <!-- <nice-title :type="1">Best</nice-title> -->
-        <tab-bar></tab-bar>
         <div class="bottom-tip" v-show="noData">暂无数据</div>
+        <tab-bar></tab-bar>
     </div>
 </template>
 
