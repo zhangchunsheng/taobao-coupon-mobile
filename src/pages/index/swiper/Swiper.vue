@@ -24,6 +24,7 @@ export default {
        return {
         swiperOption: {
           mousewheel: true,
+          direction : 'vertical',//设置垂直
           pagination: {
             el: '.swiper-pagination'
           },
